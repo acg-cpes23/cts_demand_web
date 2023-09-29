@@ -15,7 +15,8 @@ demand_df2_aux = demand_df2_aux.reindex(columns=columnsTitles)
 #----------
 #
 app = Dash(__name__)
-
+server = app.server
+#
 app.layout = html.Div([
     html.H1(children='Hourly Demand', style={'textAlign':'center'}),
     #---------
@@ -43,19 +44,19 @@ app.layout = html.Div([
 def update_graph(value):
     #
     if value == 'OPS':
-        fig = px.line( demand_df['Demand_Vessel'],\
+        fig = px.line( demand_df2['Demand_Vessel'],\
                      labels = dict(x = 'Date', y = 'Power [kW]')
                     )
     if value == 'Cranes':
-        fig = px.line( demand_df['Demand_Cranes'],\
+        fig = px.line( demand_df2['Demand_Cranes'],\
                      labels = dict(x = 'Date', y = 'Power [kW]')
                     )
     if value == 'Reefers':
-        fig = px.line( demand_df['Demand_Reefers'],\
+        fig = px.line( demand_df2['Demand_Reefers'],\
                      labels = dict(x = 'Date', y = 'Power [kW]')
                     )
     if value == 'Total':
-        fig = px.line(demand_df,y=demand_df.columns,\
+        fig = px.line(demand_df2,y=demand_df2.columns,\
                      labels = dict(x = 'Date', y = 'Power [kW]')
                     )
     return fig
